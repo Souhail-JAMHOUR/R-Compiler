@@ -1,0 +1,81 @@
+INSTS			 -> 	INST INSTF
+INSTF      		 ->  	SEP INSTS
+INSTF                    ->     ''
+INSTF                    ->     { INSTS }
+SEP                      ->     \n
+SEP                      ->     ;
+INST                     ->     SI
+INST                     ->     SINONSI
+INST                     ->     SINON
+INST                     ->     TANTQUE
+INST                     ->     POUR
+INST                     ->     ECRIRE
+INST                     ->     ID AFTERID
+AFTERID                  ->     LIRE
+AFTERID                  ->     AFFEC
+AFFEC			 ->	<- AFFECF
+AFFECF			 ->	EXPR
+AFFECF           -> " EXPR "
+AFFECF                   ->     function ( ARGUMENTS )
+SI			 ->	if ( CONDS ) { INSTS }
+SINON			 ->	else SINONF
+SINONF                   ->     { INSTS }
+SINONF                   ->     SI
+POUR			 ->	for ( BOUCLEFOR ) { INSTS }
+TANTQUE			 ->	while ( CONDS ) { INSTS }
+ECRIRE			 ->	cat ( STRING )
+ECRIRE			 ->	print ( STRING )
+LIRE			 ->	= readline ( TOREAD )
+TOREAD			 ->	prompt = " EXPR "
+TOREAD			 ->	" EXPR "
+TOREAD			 ->	''
+COND			 ->	EXPR RELOP EXPR 
+CONDS                    ->     COND CONDSF
+CONDSF                   ->     RLOGIQUE CONDS
+CONDSF                   ->     ''
+RLOGIQUE                 ->     &&
+RLOGIQUE                 ->     ||
+RELOP			 ->	==
+RELOP			 ->	!=
+RELOP			 ->	<
+RELOP			 ->	>
+RELOP			 ->	<=
+RELOP			 ->	>=
+EXPR			 ->	TERM EXPRF
+EXPRF			 ->	ADDOP EXPR
+EXPRF			 ->	''
+ADDOP			 ->	+
+ADDOP			 ->	-
+TERM			 ->	FACT TERMF 
+TERMF			 ->  MULOP TERM
+TERMF			 ->  	''
+MULOP			 ->	*
+MULOP			 ->	/
+FACT			 ->	ID
+FACT                     ->     CHIFFRE FACT
+FACT                     ->     ( EXPR )
+
+ARGUMENTS		 ->	ARGUMENT
+ARGUMENT		 ->	STRING
+STRING			 ->	" EXPR " STRINGF
+STRING			 ->	ID STRINGF
+STRING			 ->	CHIFFRE NUM STRINGF
+STRINGF                  ->	, STRING
+STRINGF                  ->	''
+BOUCLEFOR		 ->	ID in BOUCLEFORF
+BOUCLEFORF		 ->	ID
+BOUCLEFORF               ->     NUM : NUM
+ID			 ->	LETTRE IDF
+ID			 ->	''
+IDF                      ->	ID
+IDF                      ->     CHIFFRE IDF
+NUM			 ->	CHIFFRE NUM
+NUM			 ->	''
+CHIFFRE			 ->	0
+CHIFFRE			 ->	1
+CHIFFRE			 ->	2
+CHIFFRE			 ->	3
+LETTRE			 ->	a
+LETTRE			 ->	b
+LETTRE			 ->	c
+LETTRE			 ->	d
